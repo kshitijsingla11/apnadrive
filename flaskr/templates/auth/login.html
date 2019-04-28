@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Log In{% endblock %}</h1>
+
+  
+
+{% endblock %}
+
+{% block content %}
+<meta name="google-signin-client_id" content="717762328687-p17pldm5fteklla3nplbss3ai9slta0a.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer>
+  	
+  	function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+  </script>
+  <form method="post">
+      <label for="username">Username</label>
+      <input name="username" id="username" required>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+      <input type="submit" value="Log In">
+  </form>
+{% endblock %}

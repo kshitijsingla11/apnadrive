@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+   <body>
+      <table border = 1>
+         <thead>
+            <td>ID</td>
+            <td>HASH</td>
+            <td>AUTHOR_ID</td>
+            <td>CREATED</td>
+            <td>TITLE</td>
+            <td>EXTENSION</td>
+            <td>DESCRIPTION</td>
+            
+         </thead>
+         
+         {% for row in rows %}
+            <tr>
+               <td>{{row["ID"]}}</td>
+               <td>{{row["HASH"]}}</td>
+               <td> {{ row["AUTHOR_ID"]}}</td>
+               <td>{{row["CREATED"]}}</td>
+               <td>{{row["TITLE"]}}</td>
+               <td>{{row["EXTENSION"]}}</td>
+               <td>{{row["DESCRIPTION"]}}</td>
+
+            </tr>
+         {% endfor %}
+      </table>
+      
+      <a href = "/">Go back to home page</a>
+   </body>
+</html>
