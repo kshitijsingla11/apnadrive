@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+   <body>
+      <table border = 1>
+         <thead>
+            <td>Post Id</td>
+            <td>User Id</td>
+            
+            
+         </thead>
+         
+         {% for row in rows2 %}
+            <tr>
+               <td>{{row["Post Id"]}}</td>
+               <td>{{row["User Id"]}}</td>
+               
+            </tr>
+         {% endfor %}
+      </table>
+      
+      <a href = "/">Go back to home page</a>
+   </body>
+</html>

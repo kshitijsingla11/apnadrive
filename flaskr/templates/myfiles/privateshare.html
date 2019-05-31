@@ -6,8 +6,8 @@
 
 {% block content %}
   <form method="post" enctype="multipart/form-data">
-    <label for="description">Enter user name</label>
-    <textarea name="description" id="description">{{ request.form['description'] }}</textarea>
+    <label for="email">Enter Email</label>
+    <textarea name="email" id="email">{{ request.form['email'] }}</textarea>
     <input type="submit" value="Save">
     <a class="action" href="{{ url_for('myfiles.index') }}">Back</a>
   </form>

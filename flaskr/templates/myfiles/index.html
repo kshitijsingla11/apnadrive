@@ -13,15 +13,12 @@
       <header>
         <div>
           <h1>{{ post['title'] }}</h1>
-          <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+          <div class="about"> on {{ post['created'].strftime('%Y-%m-%d') }}</div>
         </div>
+        <a class="action" href="{{ url_for('myfiles.getfile', id=post['id']) }}">Download</a>
         {% if g.user['id'] == post['author_id'] %}
-
-          
-          <a class="action" href="{{ url_for('myfiles.view', id=post['id']) }}">View</a>
-          <a class="action" href="{{ url_for('myfiles.publicshare', id=post['id']) }}">Public Share</a>
           <a class="action" href="{{ url_for('myfiles.privateshare', id=post['id']) }}">Private Share</a>
-          <a class="action" href="{{ url_for('myfiles.getfile', id=post['id']) }}">Download</a>
+          <a class="action" href="{{ url_for('myfiles.publicshare', id=post['id']) }}">Public Share</a>
           <a class="action" href="{{ url_for('myfiles.update', id=post['id']) }}">Edit</a>
           <a class="action" href="{{ url_for('myfiles.delete', id=post['id']) }}">Delete</a>
         {% endif %}

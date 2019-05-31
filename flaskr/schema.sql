@@ -4,8 +4,19 @@ DROP TABLE IF EXISTS post;
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+  password TEXT NOT NULL,
+  mobilenumber TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  sex TEXT NOT NULL
 );
+
+CREATE TABLE post_user (
+  post_id INTEGER,
+  user_id INTEGER,
+  PRIMARY KEY (post_id,user_id),
+  FOREIGN KEY (post_id) REFERENCES post(id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+); 
 
 CREATE TABLE post (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,5 +26,6 @@ CREATE TABLE post (
   title TEXT NOT NULL ,
   extension TEXT NOT NULL,
   description TEXT NOT NULL,
+  isPublic TEXT DEFAULT "FALSE" NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );

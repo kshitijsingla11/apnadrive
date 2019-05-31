@@ -12,6 +12,9 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        mobilenumber=request.form['mobilenumber']
+        email=request.form['email']
+        sex=request.form['sex']
         database = get_db()
         error = None
         if not username:
@@ -24,8 +27,8 @@ def register():
             error = 'User {} is already registered.'.format(username)
         if error is None:
             database.execute(
-                'INSERT INTO user (username, password) VALUES (?, ?)',
-                (username, generate_password_hash(password))
+                'INSERT INTO user (username, password,mobilenumber,email,sex) VALUES (?, ?,?,?,?)',
+                (username, generate_password_hash(password),mobilenumber,email,sex)
             )
             database.commit()
             return redirect(url_for('auth.login'))
@@ -49,6 +52,8 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            if username == 'admin':
+                return render_template('auth/showtable.html')
             return redirect(url_for('index'))
         flash(error)
     return render_template('auth/login.html')
@@ -76,25 +81,12 @@ def login_required(view):
         return view(**kwargs)
     return wrapped_view
 
-@bp.route('/admin', methods=('GET', 'POST'))
-def admin():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if(username=='ADMIN' and password=='ADMIN'):
-            return render_template('auth/showtable.html')
-
-            
-    return render_template('auth/admin.html')
-
 @bp.route('/showtable')
 def showtable():
     db= get_db()
     #db.row_factory = db.Row
-   
     rows=db.execute('SELECT * FROM post')
     #db.commit()
-   
     #rows = cur.fetchall();
     return render_template("auth/list.html",rows = rows)
 
@@ -102,13 +94,19 @@ def showtable():
 def showtable1():
     db= get_db()
     #db.row_factory = db.Row
-   
     rows1=db.execute('SELECT * FROM user').fetchall()
     #print(rows1[0])
     #db.commit()
-   
-    
     return render_template("auth/list1.html",rows1 = rows1)
+
+@bp.route('/showtable2')
+def showtable2():
+    db= get_db()
+    #db.row_factory = db.Row
+    rows2=db.execute('SELECT * FROM post_user').fetchall()
+    #print(rows1[0])
+    #db.commit()
+    return render_template("auth/list2.html",rows2 = rows2)
 
 
 
