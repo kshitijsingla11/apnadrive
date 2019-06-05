@@ -3,7 +3,7 @@ from flask import Flask
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
-    app.config['DOMAIN_NAME'] = "http:/127.0.0.1:5000/"
+    app.config['DOMAIN_NAME'] = "http:/princemehta04.pythonanywhere.com/"
     app.config['UPLOAD_FOLDER'] = os.path.join(app.instance_path, "uploads")
     app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024
     app.config.from_mapping(
