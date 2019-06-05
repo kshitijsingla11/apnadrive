@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+   <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+</head>
+
+<body>
+   <div class="container">
+      <a class="btn btn-info" href="{{url_for('myfiles.showtable')}}">Go back to home page</a>
+
+      <table class="table table-hover">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th>HASH</th>
+               <th>AUTHOR_ID</th>
+               <th>CREATED</th>
+               <th>TITLE</th>
+               <th>EXTENSION</th>
+               <th>DESCRIPTION</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for row in rows %}
+            <tr>
+               <td>{{row["ID"]}}</td>
+               <td>{{row["HASH"]}}</td>
+               <td> {{ row["AUTHOR_ID"]}}</td>
+               <td>{{row["CREATED"]}}</td>
+               <td>{{row["TITLE"]}}</td>
+               <td>{{row["EXTENSION"]}}</td>
+               <td>{{row["DESCRIPTION"]}}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+
+</body>
+
+</html>

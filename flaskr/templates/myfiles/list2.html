@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+   <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+</head>
+
+<body>
+   <div class="container">
+      <a href="{{url_for('myfiles.showtable')}}" class="btn btn-info">Go back to home page</a>
+      <table class="table table-hover">
+         <thead>
+            <tr>
+               <td>Post_Id</td>
+               <td>User_Id</td>
+            </tr>
+         </thead>
+         <tbody>
+            {% for row in rows2 %}
+            <tr>
+               <td>{{row["Post_Id"]}}</td>
+               <td>{{row["User_Id"]}}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+</body>
+
+</html>

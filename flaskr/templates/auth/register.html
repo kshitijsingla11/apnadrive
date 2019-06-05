@@ -1,22 +1,33 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Register{% endblock %}</h1>
+<h1 class="display-3 text-center">{% block title %}Register{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-  	    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <label for="mobilenumber">Mobile number</label>
-    <input name="mobilenumber" id="mobilenumber" required>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
-    <label for="sex">Sex</label>
-    <input name="sex" id="sex" required>
-    <input type="submit" value="Register">
-
+<div class="d-flex justify-content-center">
+  <form method="post" class="col-md-5">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input name="username" class="form-control" id="username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" id="password" required>
+    </div>
+    <div class="form-group">
+      <label for="mobilenumber">Mobile number</label>
+      <input name="mobilenumber" class="form-control" id="mobilenumber" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" name="email" id="email" required>
+    </div>
+    <div class="form-group">
+      <label for="sex">Sex</label>
+      <input name="sex" class="form-control" id="sex" required>
+    </div>
+    <input type="submit" class="btn btn-info btn-block btn-lg" value="Register">
   </form>
+</div>
 {% endblock %}

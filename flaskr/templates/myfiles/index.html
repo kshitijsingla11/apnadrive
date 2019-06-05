@@ -1,32 +1,39 @@
 {% extends 'base.html' %}
-
 {% block header %}
-  <h1>{% block title %}Posts{% endblock %}</h1>
-  {% if g.user %}
-    <a class="action" href="{{ url_for('myfiles.create') }}">New</a>
-  {% endif %}
+<h1 class="display-4 text-center">{% block title %}Posts{% endblock %}</h1>
+{% if g.user %}
+<a class="action" class="btn btn-link btn-info" href="{{ url_for('myfiles.create') }}">New</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
-  {% for post in posts %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ post['title'] }}</h1>
-          <div class="about"> on {{ post['created'].strftime('%Y-%m-%d') }}</div>
-        </div>
-        <a class="action" href="{{ url_for('myfiles.getfile', id=post['id']) }}">Download</a>
-        {% if g.user['id'] == post['author_id'] %}
-          <a class="action" href="{{ url_for('myfiles.privateshare', id=post['id']) }}">Private Share</a>
-          <a class="action" href="{{ url_for('myfiles.publicshare', id=post['id']) }}">Public Share</a>
-          <a class="action" href="{{ url_for('myfiles.update', id=post['id']) }}">Edit</a>
-          <a class="action" href="{{ url_for('myfiles.delete', id=post['id']) }}">Delete</a>
-        {% endif %}
-      </header>
-      <p class="body">{{ post['body'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+
+{% for post in posts %}
+<div class="card  mb-3">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>{{ post['title'] }}</h1>
+      <p><em> on {{ post['created'].strftime('%Y-%m-%d') }}</em></p>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{ post['body'] }}</p>
+    <div class="d-flex justify-content-between" ><a class="action" class="card-link"
+      href="{{ url_for('myfiles.getfile', id=post['id']) }}">Download</a>
+      {% if g.user['id'] == post['author_id'] %}
+      <a class="action" class="card-link" href="{{ url_for('myfiles.privateshare', id=post['id']) }}">Private
+        Share</a>
+      <a class="action" class="card-link" href="{{ url_for('myfiles.publicshare', id=post['id']) }}">Public Share</a>
+      <a class="action" class="card-link" href="{{ url_for('myfiles.update', id=post['id']) }}">Edit</a>
+      <a class="action" class="card-link" href="{{ url_for('myfiles.delete', id=post['id']) }}">Delete</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% if not loop.last %}
+<hr>
+{% endif %}
+{% endfor %}
+
 {% endblock %}

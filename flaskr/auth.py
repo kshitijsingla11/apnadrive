@@ -25,6 +25,10 @@ def register():
             'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
+        elif database.execute(
+            'SELECT id FROM user WHERE email = ?', (email,)
+        ).fetchone() is not None:
+            error = 'Email Address {} is already registered.'.format(email)
         if error is None:
             database.execute(
                 'INSERT INTO user (username, password,mobilenumber,email,sex) VALUES (?, ?,?,?,?)',
@@ -53,7 +57,7 @@ def login():
             session.clear()
             session['user_id'] = user['id']
             if username == 'admin':
-                return render_template('auth/showtable.html')
+                return render_template('myfiles/showtable.html')
             return redirect(url_for('index'))
         flash(error)
     return render_template('auth/login.html')
@@ -81,32 +85,6 @@ def login_required(view):
         return view(**kwargs)
     return wrapped_view
 
-@bp.route('/showtable')
-def showtable():
-    db= get_db()
-    #db.row_factory = db.Row
-    rows=db.execute('SELECT * FROM post')
-    #db.commit()
-    #rows = cur.fetchall();
-    return render_template("auth/list.html",rows = rows)
-
-@bp.route('/showtable1')
-def showtable1():
-    db= get_db()
-    #db.row_factory = db.Row
-    rows1=db.execute('SELECT * FROM user').fetchall()
-    #print(rows1[0])
-    #db.commit()
-    return render_template("auth/list1.html",rows1 = rows1)
-
-@bp.route('/showtable2')
-def showtable2():
-    db= get_db()
-    #db.row_factory = db.Row
-    rows2=db.execute('SELECT * FROM post_user').fetchall()
-    #print(rows1[0])
-    #db.commit()
-    return render_template("auth/list2.html",rows2 = rows2)
 
 
 

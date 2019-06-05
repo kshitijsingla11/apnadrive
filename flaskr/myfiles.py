@@ -17,6 +17,8 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 @bp.route('/')
 @login_required
 def index():
+    if g.user['username']=='admin':
+         return render_template('myfiles/showtable.html')
     db = get_db()
     posts = db.execute(
         'SELECT p.id, title, description, created, author_id, extension, hash '
@@ -25,6 +27,13 @@ def index():
         (g.user['id'],)
     ).fetchall()
     return render_template('myfiles/index.html', posts=posts)
+
+@bp.route('/showtable')
+@login_required
+def showtable():
+    if g.user['username']!='admin':
+        abort(403)
+    return render_template('myfiles/showtable.html')
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -186,6 +195,34 @@ def delete(id):
     db.execute('DELETE  FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('myfiles.index'))
+
+@bp.route('/list')
+@login_required
+def list():
+    if g.user['username']!='admin':
+        abort(403)
+    db= get_db()
+    rows=db.execute('SELECT * FROM post')
+    return render_template("myfiles/list.html",rows = rows)
+
+@bp.route('/list1')
+@login_required
+def list1():
+    if g.user['username']!='admin':
+        abort(403)
+    db= get_db()
+    rows1=db.execute('SELECT * FROM user').fetchall()
+    return render_template("myfiles/list1.html",rows1 = rows1)
+
+@bp.route('/list2')
+@login_required
+def list2():
+    if g.user['username']!='admin':
+        abort(403)
+    db= get_db()
+    rows2=db.execute('SELECT * FROM post_user').fetchall()
+    return render_template("myfiles/list2.html",rows2 = rows2)
+
 
 # @bp.route('/<filename>/<int:id>')
 # def uploaded_file(filename,id):

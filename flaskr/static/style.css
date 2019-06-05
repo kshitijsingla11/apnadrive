@@ -1,15 +1,17 @@
-html {
-  font-family: sans-serif;
-  background: #eee;
-  padding: 1rem;
+*{
+  box-sizing: border-box;
 }
-
-body {
-  max-width: 960px;
-  margin: 0 auto;
-  background: white;
+html,body{
+  width: 100%;
+  min-height: 100vh;
 }
-
+.container{
+  min-height: 100%;
+}
+#file{
+  height: 42px !important;
+}
+/* 
 h1, h2, h3, h4, h5, h6 {
   font-family: serif;
   color: #377ba8;
@@ -131,4 +133,4 @@ input.danger {
 input[type=submit] {
   align-self: start;
   min-width: 10em;
-}
+} */
